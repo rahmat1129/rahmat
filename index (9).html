@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificate Generator by md Rahmat Ali </title>
+    <style>
+      *,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: linear-gradient(to bottom, #080a34 0%, #09012b 100%);
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  text-align: center;
+  width: 100%;
+  padding: 15px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica;
+  font-weight: 500;
+  background: linear-gradient(to right, #200351, rgb(6, 77, 117));
+  color: #fff;
+}
+main{
+  display:flex;
+  flex-direction:column;
+}
+main > div:nth-child(2) {
+  display: flex;
+}
+#asidebar {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  max-width: 500px;
+  background: #ffffff0a;
+}
+#containerdiv {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  max-width: 700px;
+  padding-top: 20px;
+  margin: 0 auto;
+  gap: 20px;
+}
+.downloadcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3em;
+}
+#downloadtype {
+  font-size: 0.9em;
+  font-weight: 500;
+  padding: 5px 10px;
+  border: transparent;
+  border-radius: 5px;
+}
+#downloadbutton {
+  font-size: 1em;
+}
+.downloadzip{
+  display: none;
+}
+#downloadzipbutton{
+  font-size: 1em;
+}
+.uploadlabel {
+  font-size: 1.2em;
+  margin: 0 20px;
+  text-align: center;
+  width: calc(100% - 40px);
+  padding: 10px;
+}
+.uploadcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+.button {
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: rgb(25, 100, 240);
+  border: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+#asidebar {
+  padding-top: 20px;
+  gap: 10px;
+}
+#certificatecanvas {
+  width: 100%;
+  box-shadow: 0px 0px 1000px 0.5px #64ffda66;
+}
+#certificateimg {
+  display: none;
+}
+
+#inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#inputs > div {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+}
+#inputs input[type="text"] {
+  width: calc(100% - 30px);
+  padding: 10px;
+  border: 1px solid #ccc4;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica;
+  font-weight: 500;
+  background: #ffffff0a;
+  color: #fff;
+}
+#inputs input[type="text"]:disabled {
+  background: #ffffff2a;
+  color: #fff;
+  cursor: not-allowed;
+}
+#inputs input[type="checkbox"] {
+  /* change height width of checkbox */
+  width: 20px;
+  height: 20px;
+}
+.delbutton {
+  background: #ffffff0a;
+  padding: 10px;
+  border: 2px solid rgba(193, 193, 193, 0.267);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#addinput {
+  font-size: 1em;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  background: #ffffff0a;
+  color: #fff;
+  margin: 0 10px;
+  border: 1px solid #ccc4;
+  border-radius: 5px;
+}
+.optionscontainer {
+  display: flex;
+  justify-content: center;
+}
+
+.toolscontainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  flex-wrap: wrap;
+  background: #ffffff1a;
+}
+.toolscontainer > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.toolscontainer select {
+  /* width: 100%; */
+  padding: 5px 10px;
+  border: 1px solid rgba(223, 223, 223, 0.267);
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica;
+  font-weight: 500;
+  background: #ffffff0a;
+  color: #fff;
+}
+.toolscontainer select option {
+  color: #000;
+}
+
+input[type="color"] {
+  height: 100%;
+  aspect-ratio: 8/6;
+  padding: 1px;
+  border: 1px solid #ccc4;
+  border-radius: 5px;
+  background: #ffffff0a;
+}
+.colorpick-eyedropper-input-trigger {
+  display: none;
+}
+
+.formattool{
+  padding: 5px 10px;
+  font-size:1.1em;
+  background: #ffffff1a;
+  border: 1px solid #ccc4;
+  border-radius: 5px;
+  color: #fff;
+}
+.formattool[data-active="1"]{
+  background: #fff;
+  color: #000;
+}
+#textbold{
+  font-weight: bold;
+}
+#textitalic{
+  font-style: italic;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 800;
+}
+
+
+
+
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, transparent 5%, white 100%);
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 30px;
+  background:white;
+  mix-blend-mode:exclusion;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 5px;
+  height: 30px;
+  background:white;
+  mix-blend-mode:exclusion;
+  cursor: pointer;
+}
+
+
+input[type="file"]{
+  display: none;
+}
+
+
+
+
+
+@media screen and (max-width: 800px) {
+  main{
+    flex-direction: column-reverse;
+  }
+  main>div:nth-child(2){
+    flex-direction:column;
+  }
+  #asidebar{
+    width: 100%;
+    max-width: 100%;
+    margin: 5% 0;
+  }
+  .toolscontainer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #0f0941;
+    z-index: 2;
+    flex-direction: column;
+  }
+  .slidecontainer{
+    width: auto;
+  }
+
+}
+
+
+
+
+
+
+/* Progress Loader */
+.loaderbody{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000c;
+  z-index: 9;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 4em;
+
+}
+
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+   <script>
+     class JoystickController
+{
+  constructor( stickID, maxDistance, deadzone )
+  {
+    this.id = stickID;
+    let stick = document.getElementById(stickID);
+    // location from which drag begins, used to calculate offsets
+    this.dragStart = null;
+    // track touch identifier in case multiple joysticks present
+    this.touchId = null;
+    
+    this.active = false;
+    this.value = { x: 0, y: 0 }; 
+    let self = this;
+    function handleDown(event)
+    {
+        self.active = true;
+      // all drag movements are instantaneous
+      stick.style.transition = '0s';
+      // touch event fired before mouse event; prevent redundant mouse event from firing
+      event.preventDefault();
+        if (event.changedTouches)
+          self.dragStart = { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY };
+        else
+          self.dragStart = { x: event.clientX, y: event.clientY };
+      // if this is a touch event, keep track of which one
+        if (event.changedTouches)
+          self.touchId = event.changedTouches[0].identifier;
+    }
+    
+    function handleMove(event) 
+    {
+        if ( !self.active ) return;
+        // if this is a touch event, make sure it is the right one
+        // also handle multiple simultaneous touchmove events
+        let touchmoveId = null;
+        if (event.changedTouches)
+        {
+          for (let i = 0; i < event.changedTouches.length; i++)
+          {
+            if (self.touchId == event.changedTouches[i].identifier)
+            {
+              touchmoveId = i;
+              event.clientX = event.changedTouches[i].clientX;
+              event.clientY = event.changedTouches[i].clientY;
+            }
+          }
+          if (touchmoveId == null) return;
+        }
+        const xDiff = event.clientX - self.dragStart.x;
+        const yDiff = event.clientY - self.dragStart.y;
+        const angle = Math.atan2(yDiff, xDiff);
+      const distance = Math.min(maxDistance, Math.hypot(xDiff, yDiff));
+      const xPosition = distance * Math.cos(angle);
+      const yPosition = distance * Math.sin(angle);
+      // move stick image to new position
+        stick.style.transform = `translate3d(${xPosition}px, ${yPosition}px, 0px)`;
+      // deadzone adjustment
+      const distance2 = (distance < deadzone) ? 0 : maxDistance / (maxDistance - deadzone) * (distance - deadzone);
+        const xPosition2 = distance2 * Math.cos(angle);
+      const yPosition2 = distance2 * Math.sin(angle);
+        const xPercent = parseFloat((xPosition2 / maxDistance).toFixed(4));
+        const yPercent = parseFloat((yPosition2 / maxDistance).toFixed(4));
+        
+        self.value = { x: xPercent, y: yPercent };
+      }
+    function handleUp(event) 
+    {
+        if ( !self.active ) return;
+        // if this is a touch event, make sure it is the right one
+        if (event.changedTouches && self.touchId != event.changedTouches[0].identifier) return;
+        // transition the joystick position back to center
+        stick.style.transition = '.2s';
+        stick.style.transform = `translate3d(0px, 0px, 0px)`;
+        // reset everything
+        self.value = { x: 0, y: 0 };
+        self.touchId = null;
+        self.active = false;
+    }
+    stick.addEventListener('mousedown', handleDown);
+    stick.addEventListener('touchstart', handleDown);
+    document.addEventListener('mousemove', handleMove, {passive: false});
+    document.addEventListener('touchmove', handleMove, {passive: false});
+    document.addEventListener('mouseup', handleUp);
+    document.addEventListener('touchend', handleUp);
+  }
+}
+   </script>
+  </head>
+  <body>
+    <header>
+      <h1>Certificate Generator</h1>
+    </header>
+    
+    <main id="main">
+      <div class="toolscontainer">
+        <div class="textforamtting">
+          <select id="fontfamily" class="font-family">
+            <option value="Arial">Arial</option>
+            <option value="roboto">robots</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Impact">Impact</option>
+            <option value="Lucida Console">Lucida Console</option>
+            <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+          </select>
+          <select id="fontsize">
+            <option value="1">1x</option>
+            <option value="2">2x</option>
+            <option value="3">3x</option>
+            <option value="4">4x</option>
+            <option value="5">5x</option>
+            <option value="6">6x</option>
+            <option value="7">7x</option>
+            <option value="8">8x</option>
+            <option value="9">9x</option>
+            <option value="10">10x</option>
+          </select>
+          <select id="textalign">
+            <option value="left">Left</option>
+            <option value="center">Center</option>
+            <option value="right">Right</option>
+          </select>
+        </div>
+        <div class="textforamtting">
+          <button id="textbold" class="formattool" data-active="0">B</button>
+          <button id="textitalic" class="formattool" data-active="0">I</button>
+          <input type="color" id="textcolor" />
+          <div class="slidecontainer">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="80"
+              class="slider"
+              id="textopacity"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div id="containerdiv">
+          <div id="certificatediv">
+            <canvas id="certificatecanvas"></canvas>
+          </div>
+          <div class="downloadcontainer downloadfile">
+            <div>
+              Download as:
+              <select id="downloadtype">
+                <option value="png">PNG</option>
+                <option value="jpg">JPG</option>
+                <option value="pdf">PDF</option>
+              </select>
+            </div>
+            <div>
+              <button id="downloadbutton" class="button">Download</button>
+            </div>
+          </div>
+          <div class="downloadcontainer downloadzip">
+            <button id="downloadzipbutton" class="button">Download Zip</button>
+          </div>
+        </div>
+        <div id="asidebar">
+          <div id="editor"></div>
+          <div class="uploadcontainer">
+            <!-- Limit only Image Files -->
+            <label class="button uploadlabel">
+              Upload CSV/Excel
+              <input
+                id="uploadcsv"
+                type="file"
+                class="button"
+                value="Upload Image"
+                accept=".csv,application/vnd.ms-excel,.xlt,application/vnd.ms-excel,.xla,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.xltx,application/vnd.openxmlformats-officedocument.spreadsheetml.template,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.xltm,application/vnd.ms-excel.template.macroEnabled.12,.xlam,application/vnd.ms-excel.addin.macroEnabled.12,.xlsb,application/vnd.ms-excel.sheet.binary.macroEnabled.12"
+              />
+            </label>
+            <label class="button uploadlabel">
+              Upload Cerrt
+              <input
+                id="uploadimage"
+                type="file"
+                class="button"
+                value="Upload Image"
+                accept="image/*"
+              />
+            </label>
+          </div>
+          <div id="inputs">
+            <div>
+              <input type="checkbox" class="certcheck" />
+              <input
+                type="text"
+                value="Holder's Name"
+                data-fontsize="7"
+                data-font="Verdana"
+                data-textalign="center"
+                data-x="50"
+                data-y="42"
+                data-color="#000"
+                data-opacity="80"
+                data-bold="1"
+                data-italic="0"
+                class="certinputs"
+              />
+              <button class="delbutton"><i class="fa fa-trash"></i></button>
+            </div>
+            <div>
+              <input type="checkbox" class="certcheck" />
+              <input
+                type="text"
+                value="Organization's Name"
+                data-fontsize="4"
+                data-font="Verdana"
+                data-textalign="center"
+                data-x="50"
+                data-y="26"
+                data-color="#000"
+                data-opacity="80"
+                class="certinputs"
+                data-bold="0"
+                data-italic="0"
+              />
+
+              <button class="delbutton"><i class="fa fa-trash"></i></button>
+            </div>
+            <div>
+              <input type="checkbox" class="certcheck" />
+              <input
+                type="text"
+                value="using CERRT "
+                data-fontsize="3"
+                data-font="Verdana"
+                data-textalign="center"
+                data-x="50"
+                data-y="64"
+                data-color="#000"
+                data-opacity="80"
+                class="certinputs"
+                data-bold="0"
+                data-italic="0"
+              />
+              <button class="delbutton"><i class="fa fa-trash"></i></button>
+            </div>
+          </div>
+          <div class="optionscontainer">
+            <button id="addinput"><i class="fa fa-plus"></i> Add</button>
+          </div>
+          <div style="display: flex; justify-content: center">
+            <div style="width: 128px; position: relative">
+              <img
+                src="https://www.cssscript.com/demo/touch-joystick-controller/images/joystick-base.png"
+              />
+              <div id="stick" style="position: absolute; left: 32px; top: 32px">
+                <img
+                  src="https://www.cssscript.com/demo/touch-joystick-controller/images/joystick-red.png"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="loaderbody">
+      <div>
+       <span id="progress">-/-</span>
+      
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.1.0/jszip-utils.min.js"></script>
+    <script>
+      //  Initializing variables
+var defaultCertPNG = "certificates/dummy.png";
+var defaultFontSize = 20;
+var defaultFont = "Arial";
+var defaultColor = "black";
+var prevX = 0;
+var prevY = 0;
+
+// Defining Canvas
+var canvas = document.getElementById("certificatecanvas");
+var ctx = canvas.getContext("2d");
+var certImage = new Image();
+
+var canvasOffset = canvas.getBoundingClientRect();
+var offsetX = canvasOffset.left;
+var offsetY = canvasOffset.top;
+var scrollX = window.pageXOffset;
+var scrollY = window.pageYOffset;
+var startX = 0;
+var startY = 0;
+var selectedElement = null;
+var dragMode = false;
+
+// Defining Sheet Stuffs
+var titles = null;
+var sheetData = null;
+var progress = document.getElementById("progress");
+var loaderbody = document.querySelector(".loaderbody");
+
+// Defining DOM Elements
+var Inputs = document.getElementById("inputs");
+var downloadTypeButton = document.getElementById("downloadtype");
+var downloadButton = document.getElementById("downloadbutton");
+var downloadZipButton = document.getElementById("downloadzipbutton");
+var imageFileInput = document.getElementById("uploadimage");
+var addInputButton = document.getElementById("addinput");
+var Editor = {
+  font: document.getElementById("fontfamily"),
+  fontsize: document.getElementById("fontsize"),
+  textalign: document.getElementById("textalign"),
+  color: document.getElementById("textcolor"),
+  bold: document.getElementById("textbold"),
+  italic: document.getElementById("textitalic"),
+  opacity: document.getElementById("textopacity")
+};
+
+// On Document Load
+document.addEventListener("DOMContentLoaded", function () {
+  // Creating Image from PNG file
+  certImage.src = defaultCertPNG;
+  var dimentionRatio = certImage.width / certImage.height;
+
+  // When Image Loads Successfully
+  certImage.onload = function () {
+    // Setting Canvas Size
+    canvas.width = certImage.width;
+    canvas.height = certImage.height;
+    defaultFontSize = canvas.width / 100;
+    console.log(defaultFontSize);
+    drawTextfromInputs();
+    addListenerToInputs();
+  };
+});
+
+function addListenerToInputs() {
+  var inputs = document.getElementsByClassName("certinputs");
+  var inputsLength = inputs.length;
+  for (var i = 0; i < inputsLength; i++) {
+    inputs[i].addEventListener("keyup", function () {
+      drawTextfromInputs();
+    });
+  }
+
+  var delbuttons = document.getElementsByClassName("delbutton");
+  for (var i = 0; i < delbuttons.length; i++) {
+    delbuttons[i].addEventListener("click", function () {
+      var parent = this.parentNode;
+      parent.remove();
+      drawTextfromInputs();
+    });
+  }
+
+  var checkboxes = document.getElementsByClassName("certcheck");
+  for (var i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].addEventListener("change", function () {
+      updateEditorOptions();
+    });
+  }
+}
+
+function updateEditorOptions() {
+  var checkedCheckboxes = Inputs.querySelectorAll("input:checked");
+
+  if (checkedCheckboxes.length === 1) {
+    var selectionData =
+      checkedCheckboxes[0].parentNode.querySelector(".certinputs").dataset;
+    selectedElement =
+      checkedCheckboxes[0].parentNode.querySelector(".certinputs");
+    Editor.font.value = selectionData.font;
+    Editor.fontsize.value = selectionData.fontsize;
+    Editor.textalign.value = selectionData.textalign;
+    Editor.color.value = selectionData.color;
+    Editor.bold.dataset.active = selectionData.bold;
+    Editor.italic.dataset.active = selectionData.italic;
+    Editor.opacity.value = selectionData.opacity;
+  } else {
+    // Do Nothing
+    selectedElement = null;
+  }
+  drawTextfromInputs();
+}
+
+function drawTextfromInputs() {
+  // Clearing Canvas with white background
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "black";
+
+  ctx.drawImage(certImage, 0, 0, canvas.width, canvas.height);
+
+  // Getting Inputs
+  var textInputs = document.getElementsByClassName("certinputs");
+  var textInputsLength = textInputs.length;
+
+  // Looping through Inputs
+  for (var i = 0; i < textInputsLength; i++) {
+    // Getting Input
+    var textInput = textInputs[i];
+
+    // Getting Input Values
+    var text = textInput.value;
+    var position = [textInput.dataset.x, textInput.dataset.y];
+    var fontSize = textInput.dataset.fontsize;
+    var font = textInput.dataset.font;
+    var textAlign = textInput.dataset.textalign;
+    var opacity = textInput.dataset.opacity;
+    var color = textInput.dataset.color;
+    var bold = textInput.dataset.bold;
+    var italic = textInput.dataset.italic;
+    var editable = textInput.dataset.editable;
+
+    // Adding Text
+    addText(
+      ctx,
+      text,
+      position,
+      fontSize,
+      font,
+      textAlign,
+      opacity,
+      color,
+      bold,
+      italic,
+      textInputs[i],
+      editable
+    );
+  }
+  if (selectedElement != null) {
+    drawBorderForSelected();
+  }
+}
+
+function drawBorderForSelected() {
+  // Create Rectange over Selected Element
+  ctx.strokeStyle = "#0B082F";
+  ctx.lineWidth = 8;
+  var x = selectedElement.dataset.x;
+  var y = selectedElement.dataset.y;
+  var width = selectedElement.dataset.width;
+  var height = selectedElement.dataset.height;
+  var fontSize = selectedElement.dataset.fontsize;
+  var sW = canvas.width / 100;
+  var sH = canvas.height / 100;
+  if (selectedElement.dataset.textalign == "center") {
+    x = x - width / 2;
+  } else if (selectedElement.dataset.textalign == "right") {
+    x = x - width;
+  }
+
+  var x1 = (x - 1) * sW;
+  var y1 = (y - 2) * sH;
+  var x2 = (Number(width) + 2) * sW;
+  var y2 = (Number(height) + 4) * sH;
+  ctx.strokeRect(x1, y1, x2, y2);
+
+  ctx.fillStyle = "white";
+  drawCircle(x1, y1);
+  drawCircle(x1 + x2, y1);
+  drawCircle(x1, y1 + y2);
+  drawCircle(x1 + x2, y1 + y2);
+
+  function drawCircle(x, y, r = 15) {
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2, false);
+    ctx.fill();
+    ctx.stroke();
+  }
+
+  console.log(sW, sH, defaultFontSize, width);
+}
+
+function addText(
+  ctx = ctx,
+  text = "Default Text",
+  position = [0, 0],
+  fontSize = 5 * defaultFontSize,
+  font = defaultFont,
+  textAlign = "center",
+  opacity = 1,
+  color = defaultColor,
+  bold = false,
+  italic = false,
+  dom,
+  editable = "1"
+) {
+  // Setting Font
+  ctx.font =
+    (Number(bold) ? "bold " : "") +
+    (Number(italic) ? "italic " : "") +
+    Number(fontSize) * defaultFontSize +
+    "px " +
+    font;
+
+  // Set color
+  ctx.fillStyle = color;
+
+  // Setting Opacity
+  ctx.globalAlpha = Number(opacity) / 100;
+
+  // Setting Text Alignment
+  ctx.textAlign = textAlign;
+
+  // Setting Text Position
+  ctx.textBaseline = "top";
+  if (editable == "0") {
+    text = "{{" + text + "}}";
+  }
+
+  // Measure Height & Width of Text
+  var textWidth = ctx.measureText(text).width * (100 / canvas.width);
+  var textHeight = fontSize;
+  dom.dataset.width = textWidth;
+  dom.dataset.height = textHeight;
+  // console.log(textWidth,textHeight);
+
+  // Setting Text Position
+  const xPos = Number(position[0] * (canvas.width / 100));
+  const yPos = Number(position[1] * (canvas.height / 100));
+
+  ctx.fillText(text, xPos, yPos);
+}
+
+downloadButton.addEventListener("click", function () {
+  selectedElement = null;
+  drawTextfromInputs();
+
+  // Getting the Download Type
+  var downloadType = downloadTypeButton.value;
+
+  if (downloadType == "png" || downloadType == "jpg") {
+    // Creating Image from Canvas
+    var image = canvas.toDataURL("image/" + downloadType);
+
+    // Creating Download Link
+    var link = document.createElement("a");
+    link.download = "certificate." + downloadType;
+    link.href = image;
+    link.click();
+  } else if (downloadType == "pdf") {
+    var pdf = new jsPDF();
+    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0);
+    pdf.save("certificate.pdf");
+  }
+});
+
+imageFileInput.addEventListener("change", function () {
+  var file = imageFileInput.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function () {
+    certImage.src = reader.result;
+  };
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    certImage.src = defaultCertPNG;
+  }
+});
+
+addInputButton.addEventListener("click", function () {
+  addField();
+});
+
+function addField(text = "Field Name", position = [20, 20], editable = true) {
+  var data = `
+ <div>
+ <input type="checkbox"  class="certcheck" />
+ <input
+   type="text"
+   value="${text}"
+   data-fontsize="5"
+   data-font="'Open Sans', sans-serif"
+   data-textalign="left"
+   data-x="${position[0]}"
+   data-y="${position[1]}"
+   data-color="#000"
+   data-opacity="80"
+   class="certinputs"
+   data-bold="0"
+   data-italic="0"
+   data-editable="${editable ? "1" : "0"}"
+   ${editable ? "" : "disabled"}
+ />
+ <button class="delbutton"><i class="fa fa-trash"></i></button>
+</div>
+ `;
+  Inputs.innerHTML += data;
+  addListenerToInputs();
+  drawTextfromInputs();
+}
+
+Editor.fontsize.addEventListener("change", function () {
+  updateDataset("fontsize", this.value);
+});
+
+Editor.textalign.addEventListener("change", function () {
+  updateDataset("textalign", this.value);
+});
+
+Editor.color.addEventListener("input", function () {
+  updateDataset("color", this.value);
+});
+
+Editor.font.addEventListener("change", function () {
+  updateDataset("font", this.value);
+});
+
+Editor.bold.addEventListener("click", function () {
+  this.dataset.active = Number(this.dataset.active) ? 0 : 1;
+  updateDataset("bold", this.dataset.active);
+});
+
+Editor.italic.addEventListener("click", function () {
+  this.dataset.active = Number(this.dataset.active) ? 0 : 1;
+  updateDataset("italic", this.dataset.active);
+});
+
+Editor.opacity.addEventListener("input", function () {
+  updateDataset("opacity", this.value);
+});
+
+function updateDataset(dataname, value, mode = "w") {
+  // alert("Color Changed");
+  var checkedCheckboxes = document
+    .getElementById("inputs")
+    .querySelectorAll("input:checked");
+  for (var i = 0; i < checkedCheckboxes.length; i++) {
+    if (mode == "a") {
+      checkedCheckboxes[i].parentNode.querySelector(".certinputs").dataset[
+        dataname
+      ] =
+        Number(
+          checkedCheckboxes[i].parentNode.querySelector(".certinputs").dataset[
+            dataname
+          ]
+        ) + Number(value);
+    } else {
+      checkedCheckboxes[i].parentNode.querySelector(".certinputs").dataset[
+        dataname
+      ] = value;
+    }
+  }
+  drawTextfromInputs();
+}
+
+let myStick = new JoystickController("stick", 64, 8);
+function loop() {
+  requestAnimationFrame(loop);
+  // Get current values
+  let x = myStick.value.x;
+  let y = myStick.value.y;
+  if (!(x == 0 && y == 0)) {
+    if (Math.abs(x - prevX) > 0.1) {
+      prevX = x;
+      updateDataset("x", x * 10, "a");
+    }
+    if (Math.abs(y - prevY) > 0.1) {
+      prevY = y;
+      updateDataset("y", y * 10, "a");
+    }
+  }
+}
+loop();
+//  On Window Resize event
+window.addEventListener("resize", function () {
+  canvasOffset = canvas.getBoundingClientRect();
+  offsetX = canvasOffset.left;
+  offsetY = canvasOffset.top;
+});
+
+// test if x,y is inside the bounding box of texts[textIndex]
+function textHittest(x, y, dom) {
+  // console.log(canvasOffset.height);
+  var data = dom.dataset;
+  var posX = Number(data.x);
+  var posY = Number(data.y);
+  var width = Number(data.width);
+  var height = Number(data.height);
+
+  var yCheck = y >= posY && y <= posY + height;
+  if (data.textalign == "center") {
+    var xCheck = x >= posX - width / 2 && x <= posX + width / 2;
+  } else if (data.textalign == "right") {
+    var xCheck = x >= posX - width && x <= posX;
+  } else {
+    var xCheck = x >= posX && x <= posX + width;
+  }
+
+  if (xCheck && yCheck) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function handleMouseDown(e) {
+  e.preventDefault();
+  startX = parseInt(e.clientX - offsetX);
+  startY = parseInt(e.clientY - offsetY);
+
+  // Mapped x and y between 0-100
+  startX = (startX / canvasOffset.width) * 100;
+  startY = (startY / canvas.getBoundingClientRect().height) * 100;
+
+  var certInputs = Inputs.getElementsByClassName("certinputs");
+  for (var i = 0; i < certInputs.length; i++) {
+    // console.log(certInputs[i]);
+
+    if (textHittest(startX, startY, certInputs[i])) {
+      // change Cursor to Pointer
+      canvas.style.cursor = "pointer";
+      selectedElement = certInputs[i];
+    }
+  }
+}
+
+// done dragging
+function handleMouseUp(e) {
+  e.preventDefault();
+  selectedElement = null;
+  canvas.style.cursor = "default";
+  drawTextfromInputs();
+  // console.log("mouse up");
+}
+
+// also done dragging
+function handleMouseOut(e) {
+  e.preventDefault();
+  selectedElement = null;
+  canvas.style.cursor = "default";
+  drawTextfromInputs();
+  // console.log("mouse out");
+}
+
+function handleMouseMove(e) {
+  if (!selectedElement) {
+    return;
+  }
+  e.preventDefault();
+  mouseX = parseInt(e.clientX - offsetX);
+  mouseY = parseInt(e.clientY - offsetY);
+
+  mouseX = (mouseX / canvasOffset.width) * 100;
+  mouseY = (mouseY / canvas.getBoundingClientRect().height) * 100;
+  // Put your mousemove stuff here
+  var dx = mouseX - startX;
+  var dy = mouseY - startY;
+  // console.log(dx, dy);
+  startX = mouseX;
+  startY = mouseY;
+  selectedElement.dataset.x = Number(selectedElement.dataset.x) + dx;
+  selectedElement.dataset.y = Number(selectedElement.dataset.y) + dy;
+  drawTextfromInputs();
+  // console.log("mouse move");
+}
+
+// listen for mouse events
+canvas.addEventListener("mousedown", function (e) {
+  dragMode = true;
+  handleMouseDown(e);
+});
+canvas.addEventListener("mousemove", function (e) {
+  if (dragMode) {
+    handleMouseMove(e);
+  }
+});
+canvas.addEventListener("mouseup", function (e) {
+  dragMode = false;
+  handleMouseUp(e);
+});
+canvas.addEventListener("mouseout", function (e) {
+  if (dragMode) {
+    handleMouseOut(e);
+    dragMode = false;
+  }
+});
+
+// ----------------------------------------------
+// ------------  CSV/Excel Upload  --------------
+// ----------------------------------------------
+
+var file = document.getElementById("uploadcsv");
+var viewer = document.getElementById("dataviewer");
+file.addEventListener("change", importFile);
+
+function importFile(evt) {
+  var f = evt.target.files[0];
+
+  if (f) {
+    var r = new FileReader();
+    r.onload = (e) => {
+      var contents = JSON.parse(processExcel(e.target.result));
+      // Get First object from object Contents
+      var data = Object.values(contents)[0];
+      titles = data[0];
+      sheetData = data.slice(1);
+      console.log(sheetData);
+
+      Inputs.innerHTML = "";
+      document.querySelector(".downloadzip").style.display = "flex";
+      // document.querySelector(".downloadzip").href = "data:text/csv;charset=utf-8," + encodeURIComponent(data.map(row => titles.map(field => row[field]).join(",")).join("\n"));
+      document.querySelector(".downloadfile").style.display = "none";
+      titles.forEach((title, i) => {
+        addField(title, [20, 20 + i * 10], false);
+      });
+    };
+    r.readAsBinaryString(f);
+  } else {
+    console.log("Failed to load file");
+  }
+}
+
+function processExcel(data) {
+  var workbook = XLSX.read(data, {
+    type: "binary"
+  });
+
+  var firstSheet = workbook.SheetNames[0];
+  var data = to_json(workbook);
+  return data;
+}
+
+function to_json(workbook) {
+  var result = {};
+  workbook.SheetNames.forEach(function (sheetName) {
+    var roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {
+      header: 1
+    });
+    if (roa.length) result[sheetName] = roa;
+  });
+  return JSON.stringify(result, 2, 2);
+}
+
+// ----------------------------------------------
+// ------------  Generating Zip  ----------------
+// ----------------------------------------------
+
+downloadZipButton.addEventListener("click", function (e) {
+  // Start recording Time
+  var startTime = new Date();
+
+  console.log("Downloading Zip");
+
+
+  var zip = new JSZip();
+  var count = 0;
+  var totalRows = sheetData.length;
+  var zipFilename = "CERRT_SemiKolan.zip";
+  var effectiveDOMs = [];
+  var dataIndex = [];
+  Inputs.querySelectorAll(".certinputs").forEach(function (input) {
+    // console.log("input", input);
+    if (titles.includes(input.value)) {
+      input.dataset.editable = "1";
+      effectiveDOMs.push(input);
+      dataIndex.push(titles.indexOf(input.value));
+    }
+  });
+
+  sheetData.forEach(function (row, i) {
+    effectiveDOMs.forEach(function (dom, j) {
+      dom.value = row[dataIndex[j]];
+    });
+    drawTextfromInputs();
+
+    var filename = "Cerrt_" + (i + 1) + ".png";
+    var src = canvas.toDataURL("image/png");
+    // loading a file and add it in a zip file
+    JSZipUtils.getBinaryContent(src, function (err, data) {
+      if (err) {
+        throw err; // or handle the error
+      }
+      zip.file(filename, data, { binary: true });
+      count++;
+      if (count == sheetData.length) {
+        zip.generateAsync({ type: "blob" }).then(function (content) {
+          saveAs(content, zipFilename);
+          console.log("Certificate Downloaded");
+
+          // Print Time
+          var endTime = new Date();
+          var timeDiff = endTime - startTime;
+          console.log("Time Taken: " + timeDiff + "ms");
+          progress.innerHTML = `Generated ${totalRows} certificates in ${timeDiff/1000} seconds`;
+
+
+          loaderbody.style.display = "flex";
+          effectiveDOMs.forEach(function (dom, j) {
+            dom.dataset.editable = "0";
+            dom.value = titles[dataIndex[j]];
+          });
+          drawTextfromInputs();
+          setTimeout(function () {
+            loaderbody.style.display = "none";
+          }, 5000);
+        });
+      }
+    });
+  });
+
+  // loaderbody.style.display = "none";
+});
+
+    </script>
+  </body>
+</html>
